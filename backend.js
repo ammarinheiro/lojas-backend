@@ -29,7 +29,7 @@ app.post('/registrar-venda', (req, res) => {
         db.lojas[loja] = { vendas: [], objetivo: {} };
     }
     
-    db.lojas[loja].vendas.push({ data, cliente, aparelho, valor, pagamento, entrega });
+    db.lojas[loja].vendas.push({ data, cliente, aparelho, valor: parseFloat(valor), pagamento, entrega });
     writeData(db);
     res.json({ message: 'Venda registrada com sucesso!' });
 });
@@ -50,7 +50,7 @@ app.post('/definir-objetivo', (req, res) => {
         db.lojas[loja] = { vendas: [], objetivo: {} };
     }
     
-    db.lojas[loja].objetivo[mes] = objetivo;
+    db.lojas[loja].objetivo[mes] = parseFloat(objetivo);
     writeData(db);
     res.json({ message: 'Objetivo definido com sucesso!' });
 });
